@@ -27,8 +27,10 @@ export class PostsService {
   }
 
   async update(postId: string, updatePostDto: UpdatePostDto): Promise<Post> {
-    return this.postModel.findOneAndUpdate({ postId }, updatePostDto, {
-      returnOriginal: false,
-    });
+    return this.postModel
+      .findOneAndUpdate({ postId }, updatePostDto, {
+        returnOriginal: false,
+      })
+      .orFail();
   }
 }

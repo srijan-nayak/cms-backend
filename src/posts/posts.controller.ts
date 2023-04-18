@@ -40,6 +40,10 @@ export class PostsController {
     @Param('id') postId: string,
     @Body() updatePostDto: UpdatePostDto,
   ): Promise<BlogPost> {
-    return this.postsService.update(postId, updatePostDto);
+    try {
+      return await this.postsService.update(postId, updatePostDto);
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 }
