@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { Post as BlogPost } from './schemas/post.schema';
 import { PostsService } from './posts.service';
@@ -11,6 +19,15 @@ export class PostsController {
   @Get()
   async findAll(): Promise<BlogPost[]> {
     return this.postsService.findAll();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') postId: string): Promise<BlogPost> {
+    try {
+      return await this.postsService.findOne(postId);
+    } catch (error) {
+      throw new NotFoundException();
+    }
   }
 
   @Post()

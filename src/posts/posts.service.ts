@@ -10,16 +10,20 @@ import { UpdatePostDto } from './dto/update-post.dto';
 export class PostsService {
   constructor(@InjectModel(Post.name) private postModel: Model<Post>) {}
 
+  async findAll(): Promise<Post[]> {
+    return this.postModel.find();
+  }
+
+  async findOne(postId: string): Promise<Post> {
+    return this.postModel.findOne({ postId }).orFail();
+  }
+
   async create(createPostDto: CreatePostDto): Promise<Post> {
     const createdPost = new this.postModel({
       postId: uuidV4(),
       ...createPostDto,
     });
     return createdPost.save();
-  }
-
-  async findAll(): Promise<Post[]> {
-    return this.postModel.find().exec();
   }
 
   async update(postId: string, updatePostDto: UpdatePostDto): Promise<Post> {
