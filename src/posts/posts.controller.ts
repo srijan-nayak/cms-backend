@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -42,6 +43,15 @@ export class PostsController {
   ): Promise<BlogPost> {
     try {
       return await this.postsService.update(postId, updatePostDto);
+    } catch (error) {
+      throw new NotFoundException();
+    }
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') postId: string) {
+    try {
+      return await this.postsService.remove(postId);
     } catch (error) {
       throw new NotFoundException();
     }

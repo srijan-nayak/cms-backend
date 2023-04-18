@@ -33,4 +33,8 @@ export class PostsService {
       })
       .orFail();
   }
+
+  async remove(postId: string) {
+    return this.postModel.findOneAndDelete({ postId }).orFail();
+  }
 }
