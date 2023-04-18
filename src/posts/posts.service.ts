@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { v4 as uuidV4 } from 'uuid';
 import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostsService {
@@ -19,5 +20,11 @@ export class PostsService {
 
   async findAll(): Promise<Post[]> {
     return this.postModel.find().exec();
+  }
+
+  async update(postId: string, updatePostDto: UpdatePostDto): Promise<Post> {
+    return this.postModel.findOneAndUpdate({ postId }, updatePostDto, {
+      returnOriginal: false,
+    });
   }
 }
