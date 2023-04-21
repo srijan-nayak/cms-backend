@@ -1,6 +1,16 @@
+import { IsOptional, IsUrl, MinLength } from 'class-validator';
+
 export class CreatePostDto {
+  @MinLength(5)
   title: string;
+
+  @MinLength(3)
   author: string;
-  image: string;
+
+  @IsOptional()
+  @IsUrl()
+  image?: string;
+
+  @MinLength(10)
   content: string;
 }
