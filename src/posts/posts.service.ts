@@ -27,14 +27,14 @@ export class PostsService {
   }
 
   async update(postId: string, updatePostDto: UpdatePostDto): Promise<Post> {
-    return this.postModel
-      .findOneAndUpdate({ postId }, updatePostDto, {
-        returnOriginal: false,
-      })
-      .orFail();
+    // orFail does not work with findOneAndUpdate
+    await this.postModel.findOne({ postId }).orFail();
+    return this.postModel.findOneAndUpdate({ postId }, updatePostDto, {
+      returnOriginal: false,
+    });
   }
 
-  async remove(postId: string) {
+  async remove(postId: string): Promise<Post> {
     return this.postModel.findOneAndDelete({ postId }).orFail();
   }
 }
