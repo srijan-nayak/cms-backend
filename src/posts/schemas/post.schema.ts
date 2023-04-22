@@ -5,19 +5,19 @@ export type PostDocument = HydratedDocument<Post>;
 
 @Schema()
 export class Post {
-  @Prop()
+  @Prop({ isRequired: true })
   postId: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   title: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   author: string;
 
   @Prop()
   image: string;
 
-  @Prop()
+  @Prop({ isRequired: true })
   content: string;
 }
 
