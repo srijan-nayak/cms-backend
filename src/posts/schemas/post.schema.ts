@@ -19,6 +19,12 @@ export class Post {
 
   @Prop({ isRequired: true })
   content: string;
+
+  @Prop({ isRequired: true })
+  titleColor: string;
+
+  @Prop({ isRequired: true })
+  backgroundColor: string;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

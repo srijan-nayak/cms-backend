@@ -1,4 +1,4 @@
-import { IsOptional, IsUrl, MinLength } from 'class-validator';
+import { IsHexColor, IsOptional, IsUrl, MinLength } from 'class-validator';
 
 export class UpdatePostDto {
   @IsOptional()
@@ -16,4 +16,10 @@ export class UpdatePostDto {
   @IsOptional()
   @MinLength(10)
   content?: string;
+
+  @IsHexColor()
+  titleColor: string;
+
+  @IsHexColor()
+  backgroundColor: string;
 }
