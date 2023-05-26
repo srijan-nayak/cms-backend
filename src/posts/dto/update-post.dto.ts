@@ -17,9 +17,11 @@ export class UpdatePostDto {
   @MinLength(10)
   content?: string;
 
+  @IsOptional()
   @IsHexColor()
-  titleColor: string;
+  titleColor?: string;
 
+  @IsOptional()
   @IsHexColor()
-  backgroundColor: string;
+  backgroundColor?: string;
 }
